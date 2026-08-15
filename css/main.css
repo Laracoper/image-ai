@@ -29,7 +29,8 @@ img {
 .image-preview-box {
     position: relative;
     width: 100%;
-    height: 450px; /* 🎯 Сделали выше для широких экранов, чтобы картинка смотрелась сочно */
+    height: 450px;
+    /* 🎯 Сделали выше для широких экранов, чтобы картинка смотрелась сочно */
     background: #000;
     border: 1px solid var(--border-color);
     border-radius: 8px;
@@ -73,16 +74,19 @@ img {
 /* 📦 Основной контейнер ИИ-сервиса */
 .container {
     width: 100%;
-    max-width: 900px; /* 🎯 Увеличили с 500px до 900px для больших экранов */
+    max-width: 900px;
+    /* 🎯 Увеличили с 500px до 900px для больших экранов */
     background: var(--panel-bg);
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    padding: 30px; /* Сделали отступы чуть больше для солидности на десктопе */
+    padding: 30px;
+    /* Сделали отступы чуть больше для солидности на десктопе */
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     position: relative;
     z-index: 1;
     box-sizing: border-box;
-    transition: max-width 0.3s ease; /* Плавное сужение при изменении размеров окна */
+    transition: max-width 0.3s ease;
+    /* Плавное сужение при изменении размеров окна */
 }
 
 
@@ -141,7 +145,9 @@ h1 {
     -webkit-tap-highlight-color: transparent;
 }
 
-.btn:hover { background: #059669; }
+.btn:hover {
+    background: #059669;
+}
 
 /* Стили для заблокированной кнопки */
 .btn.disabled-btn {
@@ -164,10 +170,24 @@ h1 {
     border-bottom: none;
 }
 
-.dot { width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
-.dot-red { background: #ef4444; }
-.dot-yellow { background: #f59e0b; }
-.dot-green { background: #10b981; }
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+
+.dot-red {
+    background: #ef4444;
+}
+
+.dot-yellow {
+    background: #f59e0b;
+}
+
+.dot-green {
+    background: #10b981;
+}
 
 .terminal-title {
     font-size: 0.8rem;
@@ -200,11 +220,11 @@ h1 {
     height: 100vh;
     background: rgba(0, 0, 0, 0.97);
     z-index: 9999;
-    overflow-y: auto; 
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start; 
+    justify-content: flex-start;
     padding: 10px;
     box-sizing: border-box;
     opacity: 0;
@@ -222,21 +242,23 @@ h1 {
 .easter-egg-card {
     text-align: center;
     background: #111;
-    padding: 20px; /* Уменьшили паддинг по умолчанию для компактности */
+    padding: 20px;
+    /* Уменьшили паддинг по умолчанию для компактности */
     border: 2px solid #10b981;
     border-radius: 16px;
     box-shadow: 0 0 40px rgba(16, 185, 129, 0.5);
     width: 100%;
     max-width: 400px;
-    max-height: calc(100vh - 30px); /* Не дает карточке вылезать за высоту экрана */
+    max-height: calc(100vh - 30px);
+    /* Не дает карточке вылезать за высоту экрана */
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
     animation: glitch 1s infinite alternate;
-    
+
     /* 🎯 ЖЕЛЕЗНОЕ ЦЕНТРИРОВАНИЕ: auto сверху/снизу центрирует вертикально, 
        а auto слева/справа жестко держит карточку по центру экрана горизонтально */
-    margin: auto; 
+    margin: auto;
 }
 
 
@@ -252,12 +274,14 @@ h1 {
 .easter-egg-img {
     width: auto;
     max-width: 100%;
-    height: 120px; /* Фиксируем небольшую высоту */
+    height: 120px;
+    /* Фиксируем небольшую высоту */
     object-fit: contain;
     border-radius: 8px;
     border: 1px solid #333;
     margin: 10px auto;
-    flex-shrink: 0; /* Запрещаем картинке сжиматься в ноль */
+    flex-shrink: 0;
+    /* Запрещаем картинке сжиматься в ноль */
 }
 
 .iframe-container {
@@ -278,18 +302,26 @@ h1 {
 
 /* 🎯 Контейнер для спойлера скроллится внутри, если текст развернут */
 .disclaimer-scroll-box {
-    overflow-y: auto; /* Включаем внутреннюю прокрутку текста, если он не влезает */
+    overflow-y: auto;
+    /* Включаем внутреннюю прокрутку текста, если он не влезает */
     padding-right: 5px;
     margin-top: 15px;
     border-top: 1px solid #222;
     padding-top: 10px;
     text-align: left;
-    flex-grow: 1; /* Магия Flexbox: растягивает блок внутри карточки */
+    flex-grow: 1;
+    /* Магия Flexbox: растягивает блок внутри карточки */
 }
 
 @keyframes glitch {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.01); box-shadow: 0 0 45px rgba(16, 185, 129, 0.7); }
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.01);
+        box-shadow: 0 0 45px rgba(16, 185, 129, 0.7);
+    }
 }
 
 /* ⚖️ СТИЛИ ДЛЯ ОФИЦИАЛЬНОГО МОДАЛЬНОГО ОКНА (НА ВЕСЬ ЭКРАН) */
@@ -299,25 +331,32 @@ h1 {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: #111827; /* Делаем сплошной темный фон вместо прозрачного */
+    background: #111827;
+    /* Делаем сплошной темный фон вместо прозрачного */
     z-index: 10000;
     display: none;
     justify-content: center;
     align-items: center;
-    padding: 0; /* Убираем отступы, чтобы занять весь экран */
+    padding: 0;
+    /* Убираем отступы, чтобы занять весь экран */
     box-sizing: border-box;
 }
 
 .rules-modal-card {
     background: #111827;
-    border: none; /* Убираем рамки, так как окно теперь полноэкранное */
-    border-radius: 0; /* Убираем скругления углов */
-    width: 100vw; /* Растягиваем на всю ширину экрана */
-    height: 100vh; /* Растягиваем на всю высоту экрана */
+    border: none;
+    /* Убираем рамки, так как окно теперь полноэкранное */
+    border-radius: 0;
+    /* Убираем скругления углов */
+    width: 100vw;
+    /* Растягиваем на всю ширину экрана */
+    height: 100vh;
+    /* Растягиваем на всю высоту экрана */
     box-shadow: none;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+    min-height: 0;
 }
 
 
@@ -328,7 +367,8 @@ h1 {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid var(--border-color);
-    flex-shrink: 0; /* Запрещаем шапке сжиматься */
+    flex-shrink: 0;
+    /* Запрещаем шапке сжиматься */
 }
 
 .rules-modal-header h3 {
@@ -337,38 +377,60 @@ h1 {
     color: #fff;
 }
 
-.close-rules-btn { font-size: 1.5rem; color: #9ca3af; cursor: pointer; line-height: 1; }
-.close-rules-btn:hover { color: #fff; }
+.close-rules-btn {
+    font-size: 1.5rem;
+    color: #9ca3af;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.close-rules-btn:hover {
+    color: #fff;
+}
 
 .rules-modal-body {
     padding: 25px;
-    flex-grow: 1; /* Магия Flexbox: текстовый блок забирает ВСЁ свободное пространство экрана */
-    overflow-y: auto; /* Включает вертикальный скролл, если текст длинный */
-    font-size: 0.95rem; /* Слегка увеличили шрифт для удобства чтения на больших экранах */
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-height: 0;
+    /* Магия Flexbox: текстовый блок забирает ВСЁ свободное пространство экрана */
+    overflow-y: auto;
+    /* Включает вертикальный скролл, если текст длинный */
+    font-size: 0.95rem;
+    /* Слегка увеличили шрифт для удобства чтения на больших экранах */
     line-height: 1.6;
     color: #9ca3af;
     text-align: left;
-    max-width: 800px; /* Чтобы на огромных мониторах текст не растягивался в одну бесконечную строчку */
-    margin: 0 auto; /* Центрируем сам текстовый блок по горизонтали */
+    max-width: 800px;
+    /* Чтобы на огромных мониторах текст не растягивался в одну бесконечную строчку */
+    margin: 0 auto;
+    /* Центрируем сам текстовый блок по горизонтали */
     width: 100%;
     box-sizing: border-box;
 }
 
-.rules-modal-body p { margin: 0 0 15px 0; }
-.rules-modal-body strong { color: var(--accent-color); }
+.rules-modal-body p {
+    margin: 0 0 15px 0;
+}
+
+.rules-modal-body strong {
+    color: var(--accent-color);
+}
 
 
 /* Стилизация полосы прокрутки для красоты */
 .rules-modal-body::-webkit-scrollbar {
     width: 6px;
 }
+
 .rules-modal-body::-webkit-scrollbar-thumb {
     background: var(--border-color);
     border-radius: 3px;
 }
 
 .rules-accept-btn {
-    background: var(--accent-color); /* Сделали кнопку главной согласия ярко-зеленой */
+    background: var(--accent-color);
+    /* Сделали кнопку главной согласия ярко-зеленой */
     color: #000;
     border: none;
     padding: 18px;
@@ -376,7 +438,9 @@ h1 {
     cursor: pointer;
     font-size: 1rem;
     transition: background 0.2s;
-    flex-shrink: 0; /* Запрещаем кнопке сжиматься */
+    flex-shrink: 0;
+    margin-top: auto;
+    /* Запрещаем кнопке сжиматься */
 }
 
 .rules-accept-btn:hover {
@@ -385,29 +449,34 @@ h1 {
 
 /* 🖥️ Для больших экранов возвращаем исходную высоту картинки */
 @media (min-width: 540px) {
-    .easter-egg-img { height: 180px; }
+    .easter-egg-img {
+        height: 180px;
+    }
 }
 
 @media (max-width: 540px) {
     .container {
         padding: 15px;
     }
-    
+
     .image-preview-box {
-        height: 220px; /* Делаем превью оригинала более аккуратным на мобилках */
+        height: 220px;
+        /* Делаем превью оригинала более аккуратным на мобилках */
     }
 
     .easter-egg-card {
-        padding: 15px; /* Чуть меньше отступы внутри, чтобы сберечь место */
+        padding: 15px;
+        /* Чуть меньше отступы внутри, чтобы сберечь место */
         /* Нам больше не нужно менять max-width здесь, она автоматически сожмется под размер экрана */
     }
 
     .easter-egg-card h2 {
-        font-size: 1.2rem; /* Уменьшаем заголовок, чтобы он не ломал ширину */
+        font-size: 1.2rem;
+        /* Уменьшаем заголовок, чтобы он не ломал ширину */
     }
 
     .easter-egg-img {
-        max-height: 140px; /* Сужаем картинку хакера, чтобы помещался текст донатов */
+        max-height: 140px;
+        /* Сужаем картинку хакера, чтобы помещался текст донатов */
     }
 }
-
