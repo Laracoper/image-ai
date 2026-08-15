@@ -1,0 +1,413 @@
+:root {
+    --bg-color: #0b0f19;
+    --panel-bg: #111827;
+    --accent-color: #10b981;
+    --text-color: #f3f4f6;
+    --border-color: #374151;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* 🖼️ Блок заблюренной картинки оригинала */
+.image-preview-box {
+    position: relative;
+    width: 100%;
+    height: 450px; /* 🎯 Сделали выше для широких экранов, чтобы картинка смотрелась сочно */
+    background: #000;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.blurred-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(25px);
+    transform: scale(1.1);
+}
+
+/* Плашка с текстом поверх блюра */
+.blur-overlay {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10px 20px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    z-index: 2;
+    width: 80%;
+    box-sizing: border-box;
+}
+
+.blur-overlay span {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #fff;
+    font-family: monospace;
+}
+
+/* 📦 Основной контейнер ИИ-сервиса */
+.container {
+    width: 100%;
+    max-width: 900px; /* 🎯 Увеличили с 500px до 900px для больших экранов */
+    background: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px; /* Сделали отступы чуть больше для солидности на десктопе */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+    transition: max-width 0.3s ease; /* Плавное сужение при изменении размеров окна */
+}
+
+
+/* Блок безопасности на главной */
+.safety-agreement-box {
+    background: rgba(31, 41, 55, 0.5);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 15px;
+}
+
+.agreement-label {
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+    font-size: 0.8rem;
+    color: #9ca3af;
+    line-height: 1.4;
+    user-select: none;
+}
+
+.agreement-label input {
+    margin-right: 10px;
+    margin-top: 2px;
+    cursor: pointer;
+    accent-color: var(--accent-color);
+}
+
+.rules-link {
+    color: var(--accent-color);
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 1.2rem;
+    margin-top: 0;
+    text-align: center;
+    color: #fff;
+    letter-spacing: 0.5px;
+}
+
+.btn {
+    background: var(--accent-color);
+    color: #000;
+    border: none;
+    padding: 14px 20px;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.btn:hover { background: #059669; }
+
+/* Стили для заблокированной кнопки */
+.btn.disabled-btn {
+    background: #1f2937 !important;
+    color: #4b5563 !important;
+    box-shadow: none !important;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* 🖥— Терминал */
+.terminal-header {
+    display: flex;
+    align-items: center;
+    background: #1f2937;
+    padding: 8px 12px;
+    border-radius: 6px 6px 0 0;
+    margin-top: 20px;
+    border: 1px solid var(--border-color);
+    border-bottom: none;
+}
+
+.dot { width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
+.dot-red { background: #ef4444; }
+.dot-yellow { background: #f59e0b; }
+.dot-green { background: #10b981; }
+
+.terminal-title {
+    font-size: 0.8rem;
+    font-family: monospace;
+    color: #9ca3af;
+    margin-left: 10px;
+}
+
+.console {
+    background: #000;
+    color: #34d399;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 12px;
+    border-radius: 0 0 6px 6px;
+    height: 140px;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    white-space: pre-wrap;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    box-sizing: border-box;
+}
+
+/* 🎭 ПОЛНОЭКРАННЫЙ ОВЕРЛЕЙ ХАКЕРА */
+.easter-egg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.97);
+    z-index: 9999;
+    overflow-y: auto; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; 
+    padding: 10px;
+    box-sizing: border-box;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.easter-egg-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Ограничиваем карточку по высоте, чтобы она железно влезала в мобильный экран */
+/* Карточка хакера */
+.easter-egg-card {
+    text-align: center;
+    background: #111;
+    padding: 20px; /* Уменьшили паддинг по умолчанию для компактности */
+    border: 2px solid #10b981;
+    border-radius: 16px;
+    box-shadow: 0 0 40px rgba(16, 185, 129, 0.5);
+    width: 100%;
+    max-width: 400px;
+    max-height: calc(100vh - 30px); /* Не дает карточке вылезать за высоту экрана */
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    animation: glitch 1s infinite alternate;
+    
+    /* 🎯 ЖЕЛЕЗНОЕ ЦЕНТРИРОВАНИЕ: auto сверху/снизу центрирует вертикально, 
+       а auto слева/справа жестко держит карточку по центру экрана горизонтально */
+    margin: auto; 
+}
+
+
+.easter-egg-card h2 {
+    color: #10b981;
+    font-family: monospace;
+    font-size: 1.4rem;
+    margin: 0 0 5px 0;
+    text-shadow: 0 0 10px #10b981;
+}
+
+/* Картинка хакера на мобилках теперь маленькая и аккуратная */
+.easter-egg-img {
+    width: auto;
+    max-width: 100%;
+    height: 120px; /* Фиксируем небольшую высоту */
+    object-fit: contain;
+    border-radius: 8px;
+    border: 1px solid #333;
+    margin: 10px auto;
+    flex-shrink: 0; /* Запрещаем картинке сжиматься в ноль */
+}
+
+.iframe-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.iframe-container iframe {
+    max-width: 100%;
+    margin: 0 auto;
+    display: block;
+}
+
+/* 🎯 Контейнер для спойлера скроллится внутри, если текст развернут */
+.disclaimer-scroll-box {
+    overflow-y: auto; /* Включаем внутреннюю прокрутку текста, если он не влезает */
+    padding-right: 5px;
+    margin-top: 15px;
+    border-top: 1px solid #222;
+    padding-top: 10px;
+    text-align: left;
+    flex-grow: 1; /* Магия Flexbox: растягивает блок внутри карточки */
+}
+
+@keyframes glitch {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.01); box-shadow: 0 0 45px rgba(16, 185, 129, 0.7); }
+}
+
+/* ⚖️ СТИЛИ ДЛЯ ОФИЦИАЛЬНОГО МОДАЛЬНОГО ОКНА (НА ВЕСЬ ЭКРАН) */
+.rules-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #111827; /* Делаем сплошной темный фон вместо прозрачного */
+    z-index: 10000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 0; /* Убираем отступы, чтобы занять весь экран */
+    box-sizing: border-box;
+}
+
+.rules-modal-card {
+    background: #111827;
+    border: none; /* Убираем рамки, так как окно теперь полноэкранное */
+    border-radius: 0; /* Убираем скругления углов */
+    width: 100vw; /* Растягиваем на всю ширину экрана */
+    height: 100vh; /* Растягиваем на всю высоту экрана */
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+
+.rules-modal-header {
+    background: #0b0f19;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    flex-shrink: 0; /* Запрещаем шапке сжиматься */
+}
+
+.rules-modal-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+.close-rules-btn { font-size: 1.5rem; color: #9ca3af; cursor: pointer; line-height: 1; }
+.close-rules-btn:hover { color: #fff; }
+
+.rules-modal-body {
+    padding: 25px;
+    flex-grow: 1; /* Магия Flexbox: текстовый блок забирает ВСЁ свободное пространство экрана */
+    overflow-y: auto; /* Включает вертикальный скролл, если текст длинный */
+    font-size: 0.95rem; /* Слегка увеличили шрифт для удобства чтения на больших экранах */
+    line-height: 1.6;
+    color: #9ca3af;
+    text-align: left;
+    max-width: 800px; /* Чтобы на огромных мониторах текст не растягивался в одну бесконечную строчку */
+    margin: 0 auto; /* Центрируем сам текстовый блок по горизонтали */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.rules-modal-body p { margin: 0 0 15px 0; }
+.rules-modal-body strong { color: var(--accent-color); }
+
+
+/* Стилизация полосы прокрутки для красоты */
+.rules-modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+.rules-modal-body::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 3px;
+}
+
+.rules-accept-btn {
+    background: var(--accent-color); /* Сделали кнопку главной согласия ярко-зеленой */
+    color: #000;
+    border: none;
+    padding: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.2s;
+    flex-shrink: 0; /* Запрещаем кнопке сжиматься */
+}
+
+.rules-accept-btn:hover {
+    background: #059669;
+}
+
+/* 🖥️ Для больших экранов возвращаем исходную высоту картинки */
+@media (min-width: 540px) {
+    .easter-egg-img { height: 180px; }
+}
+
+@media (max-width: 540px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .image-preview-box {
+        height: 220px; /* Делаем превью оригинала более аккуратным на мобилках */
+    }
+
+    .easter-egg-card {
+        padding: 15px; /* Чуть меньше отступы внутри, чтобы сберечь место */
+        /* Нам больше не нужно менять max-width здесь, она автоматически сожмется под размер экрана */
+    }
+
+    .easter-egg-card h2 {
+        font-size: 1.2rem; /* Уменьшаем заголовок, чтобы он не ломал ширину */
+    }
+
+    .easter-egg-img {
+        max-height: 140px; /* Сужаем картинку хакера, чтобы помещался текст донатов */
+    }
+}
+

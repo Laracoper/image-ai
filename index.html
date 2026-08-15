@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Нейросеть: Улучшение качества изображений (ИИ)</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Улучшение контуров лица и депикселизация : ИИ-Реконструкция</h1>
+
+        <!-- Заблюренное превью картинки -->
+        <div class="image-preview-box">
+            <img src="girl.webp" alt="Превью" class="blurred-image">
+            <div class="blur-overlay">
+                <span>Изображение скрыто. Нажмите для генерации в Ultra HD</span>
+            </div>
+        </div>
+
+        <!-- Блок обязательного соглашения -->
+        <div class="safety-agreement-box">
+            <label class="agreement-label">
+                <input type="checkbox" id="safety-checkbox" onchange="toggleStartButton()">
+                <span class="checkbox-custom"></span>
+                <span class="agreement-text">
+                    Я ознакомлен с <span class="rules-link" onclick="openSafetyModal(event)">правилами сервиса</span>
+                    ( демо-тест ИИ / добровольное пожертвование )
+                </span>
+            </label>
+        </div>
+
+        <!-- Кнопка запуска -->
+        <button id="start-btn" class="btn disabled-btn" onclick="runScript()" disabled>УЛУЧШИТЬ КАЧЕСТВО
+            ИЗОБРАЖЕНИЯ</button>
+
+        <!-- Логи терминала маскируем под "процесс обработки нейросетью" -->
+        <div class="terminal-header">
+            <!-- И на главной, и в оверлее замените тег с классом dot-red на этот: -->
+            <div class="dot dot-red"></div>
+            <div class="dot dot-yellow"></div>
+            <div class="dot dot-green"></div>
+            <div class="terminal-title">ai-engine — processing.log</div>
+        </div>
+        <div id="script-output" class="console">Готов к обработке...</div>
+    </div>
+
+    <!-- 📦 Скрытый оверлей с пасхалкой -->
+    <div id="easter-egg" class="easter-egg-overlay">
+        <div class="easter-egg-card">
+            <!-- Ищем заголовок внутри карточки хакера и меняем на этот: -->
+            <h2 id="egg-title" onclick="secretAdminReset()" style="cursor: pointer; user-select: none;"
+                title="Секретный сброс">СИСТЕМА ХАКНУТА!!!</h2>
+
+            <p id="egg-os-spec"
+                style="font-size: 1.1rem; color: #ff4a4a; font-weight: bold; font-family: monospace; margin: 5px 0;">
+            </p>
+            <img src="hak.jpg" alt="Пасхалка" class="easter-egg-img">
+            <p style="font-family: monospace; color: #888; margin-bottom: 15px; font-size: 0.9rem;">
+                Файл успешно внедрен в твою файловую систему!
+            </p>
+
+            <!-- Адаптивный контейнер для фрейма ЮMoney -->
+            <div class="iframe-container">
+                <iframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=1JLVVRM98M7.260815&" width="330"
+                    height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe>​
+            </div>
+
+            <!-- Интерактивный спойлер скроллится внутри карточки -->
+            <div class="disclaimer-scroll-box">
+                <p
+                    style="margin: 0; color: #9ca3af; font-family: 'Segoe UI', sans-serif; font-size: 0.75rem; line-height: 1.4;">
+                    <strong>Образовательный проект:</strong>
+                    <span id="spoiler-link" onclick="toggleDisclaimer()"
+                        style="color: #10b981; cursor: pointer; text-decoration: underline; font-weight: bold; margin-left: 5px;">Читать
+                        далее...</span>
+                </p>
+
+                <!-- Скрытая часть текста на карточке хакера -->
+                <div id="hidden-disclaimer"
+                    style="display: none; margin-top: 8px; font-family: 'Segoe UI', sans-serif; font-size: 0.75rem; line-height: 1.4;">
+                    <p style="margin: 0 0 8px 0; color: #9ca3af;">
+                        Данная страница является безопасным интерактивным симулятором фишинговых угроз. Проект
+                        реализован в научно-образовательных целях для демонстрации методов социальной инженерии и
+                        тестирования адаптивной верстки.
+                    </p>
+                    <p style="margin: 0 0 8px 0; color: #10b981;">
+                        ✓ <strong>Правовой статус:</strong> Никакие деструктивные действия с вашей операционной системой
+                        или файлами не производятся. Ваши данные и устройство в полной безопасности (ст. 273 УК РФ).
+                    </p>
+                    <p style="margin: 0;">
+                        ➜ <strong>Финансирование:</strong> Форма выше — это официальный краудфандинг-инструмент ЮMoney.
+                        Любой перевод является добровольным пожертвованием (дарением по ст. 582 ГК РФ) на поддержку
+                        независимой веб-разработки.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ⚖️ Официальное модальное окно правил (теперь на своем месте вне скрытых блоков) -->
+    <div id="rules-modal" class="rules-modal-overlay" onclick="closeRulesModal()">
+        <div class="rules-modal-card" onclick="event.stopPropagation()">
+            <div class="rules-modal-header">
+                <h3>Пользовательское соглашение и правила сервиса</h3>
+                <span class="close-rules-btn" onclick="closeRulesModal()">&times;</span>
+            </div>
+            <div class="rules-modal-body">
+                <p><strong>1. Статус и назначение ресурса:</strong> Настоящий веб-сайт является интерактивным
+                    демонстрационным симулятором (арт-объектом) в сфере информационной безопасности. Проект создан
+                    исключительно в научно-образовательных и развлекательных целях для наглядной демонстрации концепции
+                    социальной инженерии, фишинговых угроз и интерактивного тестирования адаптивности веб-интерфейсов.
+                </p>
+
+                <p><strong>2. Отсутствие вредоносного функционала:</strong> Данный ресурс функционирует строго в рамках
+                    изолированной среды (песочницы) веб-браузера на стороне клиента. Программа физически не имеет
+                    технического доступа к вашей файловой системе, реестру или операционной системе. Сайт не производит
+                    сбор, скрытую модификацию, блокирование, удаление или шифрование файлов на вашем устройстве
+                    (соответствие ст. 273 УК РФ).</p>
+
+                <p><strong>3. Сбор и обработка данных:</strong> Данный ресурс не собирает, не хранит и не передает
+                    третьим лицам персональные данные пользователей. Техническая информация, отображаемая в процессе
+                    симуляции (название ОС, разрешение экрана), считывается браузером локально через открытые свойства
+                    User-Agent и не является конфиденциальной информацией, идентифицирующей личность (соответствие ФЗ
+                    №152 «О персональных данных»).</p>
+
+                <p><strong>4. Правовой статус платежей (Публичная оферта):</strong> Встроенный интерактивный платежный
+                    фрейм сервиса ЮMoney предназначен исключительно для безвозмездной финансовой поддержки автора
+                    проекта. Любой совершенный платеж является полностью добровольным пожертвованием (донатом /
+                    дарением) физическому лицу на общеполезные цели развития веб-технологий (регулируется ст. 572 и ст.
+                    582 ГК РФ). Данный платеж не является платой за товары, работы, услуги или программное обеспечение и
+                    не налагает на автора встречных обязательств.</p>
+
+                <p><strong>5. Безоговорочное согласие:</strong> Проставляя отметку в поле «Я ознакомлен» и запуская
+                    процесс демонстрации, пользователь подтверждает, что полностью понимает игровой, симуляционный и
+                    безопасный характер интерфейса, действует добровольно, осознанно и не имеет к автору ресурса никаких
+                    претензий.</p>
+            </div>
+
+            <button class="rules-accept-btn" onclick="closeRulesModal()">Я ознакомлен и согласен</button>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
