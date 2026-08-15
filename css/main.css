@@ -97,6 +97,7 @@ img {
     border-radius: 8px;
     padding: 12px;
     margin-bottom: 15px;
+    margin-top: 15px;
 }
 
 .agreement-label {
@@ -131,31 +132,100 @@ h1 {
 }
 
 .btn {
+    position: relative;
+    overflow: hidden;
+    /* Магия: всё, что вылетает за границы кнопки (наш блик), становится невидимым */
     background: var(--accent-color);
     color: #000;
     border: none;
-    padding: 14px 20px;
+    padding: 16px 20px;
     width: 100%;
     border-radius: 8px;
-    font-size: 1rem;
+    font-size: 1.05rem;
     font-weight: bold;
     cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
     -webkit-tap-highlight-color: transparent;
+    animation: pulse-glow 2s infinite;
 }
 
 .btn:hover {
     background: #059669;
+    box-shadow: 0 4px 25px rgba(5, 150, 105, 0.6);
 }
 
-/* Стили для заблокированной кнопки */
+/* 🔒 Стили для ЗАБЛОКИРОВАННОЙ кнопки (простой серый фон) */
 .btn.disabled-btn {
     background: #1f2937 !important;
     color: #4b5563 !important;
     box-shadow: none !important;
     cursor: not-allowed;
-    opacity: 0.6;
+    opacity: 0.7;
+    animation: none !important;
+    /* Отключаем зеленую пульсацию */
+}
+
+/* 🧼 СОЗДАЕМ ГЛЯНЦЕВЫЙ БЛИК ПОВЕРХ СЕРОЙ КНОПКИ */
+.btn.disabled-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150px;
+    /* Прячем блик далеко слева за пределами кнопки */
+    width: 80px;
+    height: 100%;
+
+    /* Белая полупрозрачная полоса, скошенная под углом */
+    background: linear-gradient(to right,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.25) 50%,
+            rgba(255, 255, 255, 0) 100%);
+    transform: skewX(-25deg);
+    /* Наклоняем блик для стиля */
+
+    /* Запускаем бесконечную анимацию полета */
+    animation: shimmer-swipe 3s infinite linear;
+}
+
+/* 🚀 АНИМАЦИЯ ПОЛЕТА БЛИКА СЛЕВА НАПРАВО */
+@keyframes shimmer-swipe {
+    0% {
+        left: -150px;
+        /* Старт за левым краем кнопки */
+    }
+
+    30% {
+        left: 120%;
+        /* За первую секунду (30% от времени) блик быстро пролетает до правого края */
+    }
+
+    100% {
+        left: 120%;
+        /* Остальные две секунды он ждет за правым краем (пауза эффекта) */
+    }
+}
+
+
+/* Текстовое предупреждение под кнопкой */
+.safety-hint {
+    display: block;
+    text-align: center;
+    color: #ef4444;
+    /* Красный предупреждающий цвет */
+    font-size: 0.8rem;
+    margin-top: 10px;
+    font-weight: 500;
+    font-family: 'Segoe UI', sans-serif;
+    transition: all 0.3s ease;
+    animation: blink-text 1.5s infinite;
+}
+
+/* Скрываем подсказку, когда всё заполнено */
+.safety-hint.hidden {
+    opacity: 0;
+    transform: translateY(-5px);
+    pointer-events: none;
 }
 
 /* 🖥— Терминал */
@@ -324,6 +394,41 @@ h1 {
     }
 }
 
+/* 🔥 ЭФФЕКТ ПУЛЬСАЦИИ КНОПКИ */
+@keyframes pulse-glow {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+    }
+
+    50% {
+        transform: scale(1.02);
+        /* Кнопка слегка увеличивается */
+        box-shadow: 0 4px 30px rgba(16, 185, 129, 0.7);
+        /* Свечение усиливается */
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+    }
+}
+
+/* 🚨 МИГАНИЕ ПОДСКАЗКИ */
+@keyframes blink-text {
+    0% {
+        opacity: 0.4;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.4;
+    }
+}
+
 /* ⚖️ СТИЛИ ДЛЯ ОФИЦИАЛЬНОГО МОДАЛЬНОГО ОКНА (НА ВЕСЬ ЭКРАН) */
 .rules-modal-overlay {
     position: fixed;
@@ -423,7 +528,8 @@ h1 {
     cursor: pointer;
     font-size: 1rem;
     transition: background 0.2s;
-    z-index: 10001; /* Кнопка будет строго поверх текста */
+    z-index: 10001;
+    /* Кнопка будет строго поверх текста */
     text-align: center;
     box-sizing: border-box;
 }

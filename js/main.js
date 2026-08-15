@@ -4,19 +4,19 @@ document.addEventListener("DOMContentLoaded", () => {
     if (localStorage.getItem("isHacked") === "true") {
         console.log("[ADMIN] Чтобы сбросить симулятор, кликните 5 раз по заголовку 'СИСТЕМА ХАКНУТА!!!' или введите: localStorage.clear(); location.reload();");
         const detectedOS = detectOS();
-        
+
         // Сразу подставляем ОС в карточку хакера
         const osSpecBlock = document.getElementById('egg-os-spec');
         if (osSpecBlock) {
             osSpecBlock.textContent = `Ваша система [${detectedOS}] успешно скомпрометирована!`;
         }
-        
+
         // Мгновенно активируем оверлей с хакером без анимации терминала
         const easterEgg = document.getElementById('easter-egg');
         if (easterEgg) {
             easterEgg.classList.add('active');
         }
-        
+
         // Маскируем главный экран (чтобы логи не смущали)
         const consoleBlock = document.getElementById('script-output');
         if (consoleBlock) {
@@ -105,7 +105,7 @@ TARGET_OS:${osDetected}
     // 🎭 3. Отработка фронтенд-части: подстановка данных в пасхалку и активация
     document.getElementById('egg-os-spec').textContent = `Ваша система [${detectedOSForPopup}] успешно скомпрометирована!`;
 
-       // 🎯 СОХРАНЯЕМ СОСТОЯНИЕ В ПАМЯТЬ БРАУЗЕРА
+    // 🎯 СОХРАНЯЕМ СОСТОЯНИЕ В ПАМЯТЬ БРАУЗЕРА
     localStorage.setItem("isHacked", "true");
 
     setTimeout(() => {
@@ -117,26 +117,43 @@ TARGET_OS:${osDetected}
 function toggleDisclaimer() {
     const hiddenBlock = document.getElementById('hidden-disclaimer');
     const link = document.getElementById('spoiler-link');
-    
+
     if (hiddenBlock.style.display === 'none') {
         hiddenBlock.style.display = 'block';
         link.style.display = 'none'; // Скрываем ссылку после нажатия, так как текст раскрыт полностью
     }
 }
 
-// Функция активации главной кнопки при клике на чекбокс
+// Переключение активности главной кнопки и подсказки
 function toggleStartButton() {
     const checkbox = document.getElementById('safety-checkbox');
     const btn = document.getElementById('start-btn');
-    
-    if (checkbox.checked) {
-        btn.disabled = false;
-        btn.classList.remove('disabled-btn');
-    } else {
-        btn.disabled = true;
-        btn.classList.add('disabled-btn');
+    const hint = document.getElementById('safety-hint');
+
+    if (checkbox && btn) {
+        if (checkbox.checked) {
+            // 1. Активируем кнопку
+            btn.disabled = false;
+            btn.classList.remove('disabled-btn');
+
+            // 2. Железно скрываем красную подсказку
+            if (hint) {
+                hint.style.display = 'none';
+            }
+        } else {
+            // 3. Блокируем кнопку обратно, если галочку сняли
+            btn.disabled = true;
+            btn.classList.add('disabled-btn');
+
+            // 4. Снова показываем подсказку
+            if (hint) {
+                hint.style.display = 'block';
+            }
+        }
     }
 }
+
+
 
 // Функция, которая принудительно показывает спойлер "Читать далее", 
 // если пользователь нажал на ссылку "правилами сервиса" прямо на главной
@@ -144,7 +161,7 @@ function toggleStartButton() {
 function openSafetyModal(event) {
     event.preventDefault(); // Отменяем переход по ссылке
     event.stopPropagation();
-    
+
     const modal = document.getElementById('rules-modal');
     modal.style.display = 'flex';
 }
@@ -163,7 +180,7 @@ let adminClickTimeout;
 
 function secretAdminReset() {
     adminClickCount++;
-    
+
     // Если прошло больше 2 секунд между кликами — сбрасываем счетчик
     clearTimeout(adminClickTimeout);
     adminClickTimeout = setTimeout(() => {
@@ -173,7 +190,7 @@ function secretAdminReset() {
     // Если сделано 5 быстрых кликов подряд
     if (adminClickCount === 5) {
         localStorage.clear(); // Стираем память браузера
-        
+
         // Меняем текст заголовков, чтобы вы видели, что сброс пошел
         const mainTitle = document.getElementById('egg-title');
         if (mainTitle) {
@@ -187,7 +204,7 @@ function secretAdminReset() {
             document.body.style.transition = 'opacity 0.5s ease';
             document.body.style.opacity = '0';
         }, 500);
-        
+
         setTimeout(() => {
             location.reload(); // Возврат на чистую главную
         }, 1200);
