@@ -329,34 +329,24 @@ h1 {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     background: #111827;
-    /* Делаем сплошной темный фон вместо прозрачного */
+    /* Сплошной темный фон */
     z-index: 10000;
+    /* Самый высокий приоритет поверх всего */
     display: none;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    /* Убираем отступы, чтобы занять весь экран */
     box-sizing: border-box;
 }
 
 .rules-modal-card {
-    background: #111827;
-    border: none;
-    /* Убираем рамки, так как окно теперь полноэкранное */
-    border-radius: 0;
-    /* Убираем скругления углов */
-    width: 100vw;
-    /* Растягиваем на всю ширину экрана */
-    height: 100vh;
-    /* Растягиваем на всю высоту экрана */
-    box-shadow: none;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    min-height: 0;
+    position: relative;
+    padding-bottom: 60px;
 }
 
 
@@ -367,8 +357,6 @@ h1 {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid var(--border-color);
-    flex-shrink: 0;
-    /* Запрещаем шапке сжиматься */
 }
 
 .rules-modal-header h3 {
@@ -390,23 +378,17 @@ h1 {
 
 .rules-modal-body {
     padding: 25px;
-    flex-grow: 1;
-    flex-shrink: 1;
-    min-height: 0;
-    /* Магия Flexbox: текстовый блок забирает ВСЁ свободное пространство экрана */
     overflow-y: auto;
-    /* Включает вертикальный скролл, если текст длинный */
+    /* Включаем скролл для длинного текста */
     font-size: 0.95rem;
-    /* Слегка увеличили шрифт для удобства чтения на больших экранах */
     line-height: 1.6;
     color: #9ca3af;
     text-align: left;
     max-width: 800px;
-    /* Чтобы на огромных мониторах текст не растягивался в одну бесконечную строчку */
     margin: 0 auto;
-    /* Центрируем сам текстовый блок по горизонтали */
     width: 100%;
     box-sizing: border-box;
+    height: calc(100% - 65px);
 }
 
 .rules-modal-body p {
@@ -429,8 +411,11 @@ h1 {
 }
 
 .rules-accept-btn {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     background: var(--accent-color);
-    /* Сделали кнопку главной согласия ярко-зеленой */
     color: #000;
     border: none;
     padding: 18px;
@@ -438,9 +423,9 @@ h1 {
     cursor: pointer;
     font-size: 1rem;
     transition: background 0.2s;
-    flex-shrink: 0;
-    margin-top: auto;
-    /* Запрещаем кнопке сжиматься */
+    z-index: 10001; /* Кнопка будет строго поверх текста */
+    text-align: center;
+    box-sizing: border-box;
 }
 
 .rules-accept-btn:hover {
