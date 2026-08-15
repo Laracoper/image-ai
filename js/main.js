@@ -102,11 +102,18 @@ TARGET_OS:${osDetected}
         await new Promise(resolve => setTimeout(resolve, 250)); // Скорость печати строк
     }
 
-    // 🎭 3. Отработка фронтенд-части: подстановка данных в пасхалку и активация
+    // 3. Отработка фронтенд-части: подстановка данных в пасхалку и активация
     document.getElementById('egg-os-spec').textContent = `Ваша система [${detectedOSForPopup}] успешно скомпрометирована!`;
 
-    // 🎯 СОХРАНЯЕМ СОСТОЯНИЕ В ПАМЯТЬ БРАУЗЕРА
+    // СОХРАНЯЕМ СОСТОЯНИЕ В ПАМЯТЬ БРАУЗЕРА
     localStorage.setItem("isHacked", "true");
+
+    // ЗАПУСКАЕМ ЗВУК ТРЕВОГИ
+    const sound = document.getElementById('hacker-sound');
+    if (sound) {
+        sound.volume = 0.5; // Громкость от 0.0 до 1.0 (0.5 — средняя)
+        sound.play().catch(err => console.log("Браузер заблокировал автовоспроизведение звука:", err));
+    }
 
     setTimeout(() => {
         document.getElementById('easter-egg').classList.add('active');
